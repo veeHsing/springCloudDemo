@@ -1,0 +1,20 @@
+
+server:
+  port: 9400
+
+spring:
+  application:
+    name: api-gateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaServer02:9001/eureka/,http://eurekaServer01:9000/eureka/
+
+
+zuul:
+  routes:
+    api-zhangwx:
+#      //\u5730\u5740\u4E2D\u5E26\u6709/api\u7684\u90FD\u8DF3\u8F6C\u5230feign_consumer02\u670D\u52A1\u4E2D\u8FDB\u884C\u8BF7\u6C42
+      path: /api/**
+      serviceId: feign_consumer02

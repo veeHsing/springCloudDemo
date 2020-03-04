@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: eureka01
+
+server:
+  port: 9000
+
+eureka:
+  instance:
+    hostname: eurekaServer01
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+  client:
+    fetch-registry: true
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://eurekaServer02:9001/eureka/
+  server:
+    enable-self-preservation: false

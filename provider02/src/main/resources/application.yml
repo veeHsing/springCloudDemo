@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: provider
+
+server:
+  port: 9101
+
+eureka:
+  instance:
+    hostname: provider-server-01
+    ip-address: 127.0.0.1
+  client:
+    service-url:
+      defaultZone: http://eurekaserver01:9000/eureka/,http://eurekaserver02:9001/eureka/

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: cosumer01
+
+server:
+  port: 9200
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaServer02:9001/eureka/,http://eurekaServer01:9000/eureka/
+

@@ -9,8 +9,10 @@ spring:
     gateway:
       routes:
         - id: api-gateway2
-          #lb:lb代表从注册中心获取服务，后面接需要转发到的服务名称，这个服务名称必须跟eureka中的对应
-          uri: lb://provider
+          #lb:lb浠ｈ〃浠庢敞鍐屼腑蹇冭幏鍙栨湇鍔★紝鍚庨潰鎺ラ渶瑕佽浆鍙戝埌鐨勬湇鍔″悕绉帮紝杩欎釜鏈嶅姟鍚嶇О蹇呴』璺焑ureka涓殑瀵瑰簲
+#          uri: lb://provider
+#          uri: lb://cosumer01
+          uri: lb://feignconsumer
           predicates:
             - Path=/gateway/**
           filters:

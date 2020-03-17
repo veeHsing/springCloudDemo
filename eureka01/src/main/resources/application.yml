@@ -7,13 +7,29 @@ server:
 
 eureka:
   instance:
+    #重点说明：eureka的client注册到server时默认是使用hostname(主机名)而不是ip,这就导致client在多台机器时，服务间相互调用时也会使用hostname进行调用，从而调用失败。这时候就需要客户端使用ip把服务注册到eureka-server上，需要在eureka的client增加配置如下:
+    #
+    #eureka.instance.prefer-ip-address=true
+    #eureka.instance.instance-id=192.168.1.100:8001
+    #
+    #第一项表示使用 ip地址的方式注册，第二项表示客户端注册的ip地址，如果设置了eureka.instance.ip-address 属性，则使用该属性配置的ip，否则自动获取除环路ip外的第一个ip地址
+    #在我们的实际生产中，各个微服务部署在docker容器中，此时hostname即为容器id，会出现服务间通过网关调不通的情况
     hostname: eurekaServer01
+    #表示eureka client发送心跳给server端的频率。如果在leaseExpirationDurationInSeconds后，server端没有收到client的心跳，则将摘除该instance。
     lease-renewal-interval-in-seconds: 30
+    #表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance。
     lease-expiration-duration-in-seconds: 90
   client:
+    #是否需要从服务端获取注册信息,服务端如果是集群需要配置为true
     fetch-registry: true
+    #是否需要向服务端进行注册,如果只获取不注册，设置为false
     register-with-eureka: false
     service-url:
-      defaultZone: http://eurekaServer02:9001/eureka/
+      #注册中心地址，${eureka.instance.hostname}为配置文件中变量值获取方式
+      #http://${eureka.instance.hostname}:${server.port}/eureka/，
+      defaultZone: http://eurekaServer02:9001/eureka/  #将9000服务注册在9001上
   server:
+    # 关闭自我保护模式（缺省为打开），这样可以确保注册中心中不可用的实例被及时的剔除（不推荐）
     enable-self-preservation: false
+    # 续期时间，即扫描失效服务的间隔时间（缺省为60*1000ms）
+    eviction-interval-timer-in-ms: 6000

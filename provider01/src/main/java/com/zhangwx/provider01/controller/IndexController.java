@@ -8,7 +8,7 @@ public class IndexController {
 
     @RequestMapping("/p/index")
     public String index(){
-        int a = 10 / 0;
+//        int a = 10 / 0;
         return "provider-01-success";
     }
 }

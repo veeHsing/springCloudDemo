@@ -16,7 +16,7 @@ spring:
           predicates:
             - Path=/gateway/**
           filters:
-            - StripPrefix=1
+            - StripPrefix=1          #路由到服务上时将/gateway前缀去除
 
 eureka:
   client:

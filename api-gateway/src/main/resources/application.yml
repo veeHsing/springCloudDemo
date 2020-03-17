@@ -16,4 +16,4 @@ zuul:
   routes:
     api-zhangwx:
       path: /api/**
-      serviceId: feign_consumer02
+      serviceId: feignconsumer

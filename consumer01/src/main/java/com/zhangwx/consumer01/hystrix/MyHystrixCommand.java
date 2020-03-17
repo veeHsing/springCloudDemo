@@ -2,12 +2,14 @@ package com.zhangwx.consumer01.hystrix;
 
 import com.netflix.hystrix.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 public class MyHystrixCommand extends HystrixCommand {
 
     @Autowired
+    @LoadBalanced
     private RestTemplate restTemplate;
 
     public MyHystrixCommand(Setter setter,RestTemplate restTemplate) {

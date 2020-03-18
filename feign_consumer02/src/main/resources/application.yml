@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: feign_consumer02
+    name: feignconsumer
 
 eureka:
   client:
@@ -13,3 +13,10 @@ eureka:
 feign:
   hystrix:
     enabled: true
+
+#feign自定义负载均衡
+provider:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #配置规则 随机
+    #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule #配置规则 轮询
+    #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RetryRule #配置规则 重试

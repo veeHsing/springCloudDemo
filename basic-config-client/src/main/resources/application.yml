@@ -1,0 +1,17 @@
+
+server:
+  port: 9800
+management:
+  endpoint:
+    shutdown:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+data:
+  env: test
+  user:
+    username: zhangwx
+    password: zhangwx
